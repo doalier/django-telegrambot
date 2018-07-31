@@ -173,9 +173,11 @@ class DjangoTelegramBot(AppConfig):
                     max_connections = b.get('WEBHOOK_MAX_CONNECTIONS', 40)
 
                     prev_webhook_info = bot.getWebhookInfo()
-
+                    setted = True
                     if prev_webhook_info.url != hookurl:
                         setted = bot.setWebhook(hookurl, certificate=certificate, timeout=timeout, max_connections=max_connections, allowed_updates=allowed_updates)
+                    else:
+                        setted = False
                     webhook_info = bot.getWebhookInfo()
                     real_allowed = webhook_info.allowed_updates if webhook_info.allowed_updates else ["ALL"]
 
